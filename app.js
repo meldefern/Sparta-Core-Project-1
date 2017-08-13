@@ -1,6 +1,11 @@
 $(function(event){
+	// temp hiding
+	$('.home-wrapper').hide();
+	$('.game-wrapper').show();
+
+
 	// hide divs
-	$('.game-wrapper').hide();
+	//$('.game-wrapper').hide();
 	// get username
 	// setup event listener for start button
 	$("#start").click(function(){

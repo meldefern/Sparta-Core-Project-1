@@ -28,16 +28,29 @@ body {
 	height: 730px;
 }
 
-.wall-objects {
-	display: inline-block;
-	float: left;
+.items {
+
 }
 
-.floor-objects {
+.objects-left, .objects-center, .objects-right {
 	display: inline-block;
 	float: left;
-	clear: left;
+	padding-left: 100px;
 }
+
+.objects-left {
+	margin-top: 450px;
+}
+
+.objects-center {
+	/*clear: left;*/
+	margin-top: 300px;
+}
+
+.objects-right {
+	margin-top: 200px;
+}
+
 
 
 
