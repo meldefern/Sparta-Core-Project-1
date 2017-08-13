@@ -1,0 +1,68 @@
+body {
+	font-family: 'Inconsolata', monospace;
+}
+
+.home-wrapper {
+	background-color: #51BDDA;
+	
+	padding: 100px;
+	margin: 0 auto;
+	height: 600px;
+}
+
+.instructions {
+	background-color: #FFCD26;
+	width: 730px;
+	/*background-image: url('banner.png');*/
+}
+
+.home-wrapper header {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.game-wrapper {
+	background-image: url('roomBG.jpg');
+	background-repeat: repeat-x;
+	background-size: contain;
+	height: 730px;
+}
+
+.wall-objects {
+	display: inline-block;
+	float: left;
+}
+
+.floor-objects {
+	display: inline-block;
+	float: left;
+	clear: left;
+}
+
+
+
+/*body{
+	font-family: 'Indie Flower', cursive;
+}
+
+#home {
+	background-image: url('interior-bg/bg.jpg');
+	background-size: cover;
+}
+
+.wrapper {
+	background-image: url('gamePlayBG.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 750px;
+	margin: auto;
+}
+
+img#layer1 {
+	height: 750px;
+}
+
+button {
+	border-radius: 100%;
+	padding: 20px
+}*/
