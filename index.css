@@ -22,7 +22,7 @@ body {
 }
 
 .game-wrapper {
-	background-image: url('roomBG.jpg');
+	background-image: url('roomBG2.jpg');
 	background-repeat: repeat-x;
 	background-size: contain;
 	height: 730px;
@@ -32,23 +32,56 @@ body {
 
 }
 
-.objects-left, .objects-center, .objects-right {
+.objects-left, .objects-center-left, .objects-center-right, #umbrella, .objects-right {
 	display: inline-block;
 	float: left;
-	padding-left: 100px;
+	padding-left: 70px;
 }
 
 .objects-left {
-	margin-top: 450px;
+	margin-top: 220px;
 }
 
-.objects-center {
+.objects-center-left {
+	margin-top:300px;
+}
+
+.objects-center-right {
 	/*clear: left;*/
+	display: block;
 	margin-top: 300px;
+	margin-left: 10px
 }
 
 .objects-right {
-	margin-top: 200px;
+	margin-top: 250px;
+	padding-left: 20px;
+}
+
+#umbrella {
+	margin-top: 500px;
+	padding-left: 0;
+}
+
+.frames, .table {
+	margin-top: 100px;
+}
+
+.frames {
+	margin-left: 55px;
+}
+
+.on-wall, #bookshelf {
+	margin-top: 50px;
+}
+
+#window, #couch {
+	margin-top: 30px;
+}
+
+.on-floor {
+	margin-left: 200px;
+	margin-top: 80px;
 }
 
 
