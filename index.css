@@ -5,9 +5,8 @@ body {
 
 /*--------------------------------------------------*/
 
-.home-wrapper {
+.home-wrapper, .success-wrapper, .leaderboard-wrapper {
 	background-color: #51BDDA;
-	
 	padding: 100px;
 	margin: 0 auto;
 	height: 600px;
@@ -97,29 +96,6 @@ div.riddle-banner {
 
 /*-----------------------------------------------*/
 
-
-/*body{
-	font-family: 'Indie Flower', cursive;
+section#name-list, section#time-list {
+	display: inline-block;
 }
-
-#home {
-	background-image: url('interior-bg/bg.jpg');
-	background-size: cover;
-}
-
-.wrapper {
-	background-image: url('gamePlayBG.jpg');
-	background-size: contain;
-	background-repeat: no-repeat;
-	height: 750px;
-	margin: auto;
-}
-
-img#layer1 {
-	height: 750px;
-}
-
-button {
-	border-radius: 100%;
-	padding: 20px
-}*/

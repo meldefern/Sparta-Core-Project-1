@@ -18,24 +18,25 @@
 				<header>Escape Room</header>
 				<section class="instructions">
 					<p> 
-						Neighbour Susan calls you over for tea. Things are going well until you arrive
-						back from the bathroom to find Susan nowhere in sight, and the door locked behind
+						Your neighbour Susan calls you over for tea. Things are going well until you arrive
+						back from the bathroom to find Susan nowhere in sight, and the living room door locked behind
 						you.
 					</p>
 					<p>
-						"Solve my riddles and i'll let you out," she yells from behind the door.
+						"Find the objects that solve my riddles and i'll let you out," she calls from behind the door.
 						Not again, Susan.
 					</p>
 				</section>
-				<label>Username:</label>
+				<label>Name:</label>
 				<input type="text" name="user">
-				<button id="start">Start</button>
+				<button id="startBtn">Start</button>
   			</div>
 		</section>
 		
+		<!-- Game Screen -->
 		<section>
 			<div class="game-wrapper">
-				<header>timer</header>
+				<h1 id="timer"><time>00:00:00</time></h1>
 
 				<div class="riddle-banner">
 					<h1 class="display-message">"What goes up the chimney down, but can't go down the chimney up? "</h1>
@@ -44,9 +45,9 @@
 				<section class="items">
 					<section class="objects-left">
 						<section class="frames">
-							<img src="objects/frame1.png">
-							<img src="objects/frame2.png">
-							<img src="objects/frame3.png">
+							<img id="frame1" src="objects/frame1.png">
+							<img id="frame2" src="objects/frame2.png">
+							<img id="frame3" src="objects/frame3.png">
 						</section>
 						<section class="table">
 							<img src="objects/wine.png">
@@ -57,7 +58,7 @@
 					<section class="objects-center-left">
 						<section class="on-wall">
 							<img src="objects/lamp.png">
-							<img src="objects/shelf.png">
+							<img id="shelf" src="objects/shelf.png">
 						</section>
 						<section class="on-floor">
 							<img src="objects/cactus.png">
@@ -87,106 +88,29 @@
 			</div>
 		</section>
 
+		<!-- Success Screen -->
+		<section>
+			<div class="success-wrapper">
+				<h1>Success!</h1>
+				<button id="leaderboardBtn">Leaderboard</button>
+			</div>
+		</section>
+
+
+		<!-- Leaderboard -->
+		<section>
+			<div class="leaderboard-wrapper">
+				<h1>Leaderboard</h1>
+				<section class="list">
+					<h2>Time taken</h2>
+					<section id="time-list">
+						User Time
+					</section>
+				</section>
+				
+				
+			</div>
+		</section>
 
 	</body>
 </html>
-
-
-
-
-<!-- home screen 
-	<header hidden>
-		Game Title
-		<div class="container" >
-			<div class="row">
-				<div class="col-md-12"></div>
-					<h1>ESCAPE ROOM</h1>
-				</div>
-			</div>
-		</div>
-	</header>
-	<main hidden id="home">
-		 Instructions 
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12"></div>
-					<p> Instructions </p>
-				</div>
-			</div>
-		</div>
-		 Name input field, and Start button 
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-6">
-  					<form action="" method="get" id="myForm">
-
-    					<label>Username:</label>
-    					<input type="text" name="name" id="username">
-    					 Use submit button as start button?
-    					<input type="submit" value="Start">
-  					</form>
-				</div>
-				<div class="col-md-3"></div>
-			</div>
-		</div>
-	</main>
-
-
-		Gameplay screen 
-		<div class="wrapper">
-			<img id="layer1" src="gamePlayBG.jpg" alt="" usemap="#Map" />
-			<map name="Map" id="Map">
-    			<area alt="lamp1" title="" href="#" shape="poly" coords="1995,448,2064,448,2261,689,2170,786,1817,751" />
-    			[...]
-			</map>
-			<div>
-				timer
-			</div>
-			<h2 class="heading">Puzzle</h3>
-			<img src="banner.png">
-		</div>
-
-
-
-		Game Over screen 
-		<div hidden class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>GAME OVER</h1>
-				</div>
-			</div>
-		</div>
-		Success screen
-		<div hidden class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>SUCCESS</h1>
-				</div>
-			</div>
-			<button type="button">
-				Leaderboard
-			</button>
-		</div>
-		 Leaderboard screen
-		<div hidden class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Leaderboard</h1>
-				</div>
-			</div>
-			<div hidden class="row">
-				<div class="col-md-6">
-					<h3>Username</h3>
-					<ul>
-						<li></li>
-					</ul>
-				</div>
-				<div hidden class="col-md-6">
-					<h3>Time Taken</h3>
-					<ul>
-						<li></li>
-					</ul>
-				</div>
-			</div>
-		</div> -->
