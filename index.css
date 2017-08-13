@@ -1,6 +1,9 @@
 body {
 	font-family: 'Inconsolata', monospace;
+	color: #526262;
 }
+
+/*--------------------------------------------------*/
 
 .home-wrapper {
 	background-color: #51BDDA;
@@ -13,13 +16,14 @@ body {
 .instructions {
 	background-color: #FFCD26;
 	width: 730px;
-	/*background-image: url('banner.png');*/
 }
 
 .home-wrapper header {
 	font-size: 40px;
 	font-weight: bold;
 }
+
+/*------------------------------------------------*/
 
 .game-wrapper {
 	background-image: url('roomBG2.jpg');
@@ -28,8 +32,15 @@ body {
 	height: 730px;
 }
 
-.items {
+div.riddle-banner {
+	margin: 0 auto;
+	background-color: #5DBCD2;
+	max-width: 850px;
+	height: 180px;
 
+}
+.riddle-banner h1 {
+	font-size: 40px
 }
 
 .objects-left, .objects-center-left, .objects-center-right, #umbrella, .objects-right {
@@ -39,27 +50,27 @@ body {
 }
 
 .objects-left {
-	margin-top: 220px;
+	margin-top: 30px;
 }
 
 .objects-center-left {
-	margin-top:300px;
+	margin-top:100px;
 }
 
 .objects-center-right {
 	/*clear: left;*/
 	display: block;
-	margin-top: 300px;
+	margin-top: 100px;
 	margin-left: 10px
 }
 
 .objects-right {
-	margin-top: 250px;
+	margin-top: 50px;
 	padding-left: 20px;
 }
 
 #umbrella {
-	margin-top: 500px;
+	margin-top: 300px;
 	padding-left: 0;
 }
 
@@ -84,7 +95,7 @@ body {
 	margin-top: 80px;
 }
 
-
+/*-----------------------------------------------*/
 
 
 /*body{
