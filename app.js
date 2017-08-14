@@ -9,6 +9,7 @@ $(function(event){
 	// hide divs
 	$('.game-wrapper').hide();
 	$('.success-wrapper').hide();
+	$('.gameover-wrapper').hide();
 	$('.leaderboard-wrapper').hide();
 
 	// var used for countUp timer
@@ -19,6 +20,9 @@ $(function(event){
 	var messageOrder = ["is that all?", "go on...", "you got it dude!"];
 
 	var incorrectCall = 1;
+
+	var $lives = ["lives ", 0, 0, 0, 0, 0];
+	var livesLost = 0;
 	
 	// setup event listener for start button
 	function start($riddleCount){
@@ -33,6 +37,8 @@ $(function(event){
 	        $('.game-wrapper').show();
 	        generalEventListeners();
 	        nextRiddle($riddleCount, $username);
+
+	        $('#lives').html($lives.join(" "));
 	    });	
 	}	
 
@@ -68,26 +74,31 @@ $(function(event){
 
 	function riddle2EventListeners($riddleCount, $username){
 		// setup correct room object event listeners
-		var $frame1 = $('#frame1');
-		var $frame2 = $('#frame2');
-		var $frame3 = $('#frame3');
+		var $frame = [$('#frame1'), $('#frame2'), $('#frame3')];
 		// if clicked frame, remove first array element
 		// so items can be clicked in any order
-		$frame1.click(function(){
-			shiftArray($riddleCount, $username, $frame1);
+		$frame[0].click(function(){
+			shiftArray($riddleCount, $username, $frame[0]);
 		});
-		$frame2.click(function(){
-			shiftArray($riddleCount, $username, $frame2);
+		$frame[1].click(function(){
+			shiftArray($riddleCount, $username, $frame[1]);
 		});
-		$frame3.click(function(){
-			shiftArray($riddleCount, $username, $frame3);
+		$frame[2].click(function(){
+			shiftArray($riddleCount, $username, $frame[3]);
 		});
 	}
 
 	function riddle3EventListeners($riddleCount, $username){
 		// setup correct room object event listeners
+		var $solution = [$('#window'), $('#wine'), $('#cactus'), $('#cat')];
 
-	}
+		for (var i = 0; i < $solution.length; i++){
+			
+		}
+		
+
+		}
+
 
 	function generalEventListeners(){
 		// setup incorrect table listener
@@ -117,29 +128,45 @@ $(function(event){
 
 		$('#chair').click(function(){
 			$('.display-message').html("Not quite")
+			resetToCorrectRiddle();
 		});
+		
+		
 	}
 
 	function resetToCorrectRiddle(){
 		// timeout function for 2.5 seconds
+		livesLost++
+		if (livesLost === 5) {
+			$('.game-wrapper').hide();
+			$('.gameover-wrapper').show();
+		} else {
+			loseLife(livesLost);
+		}
 		setTimeout(function(){
 			if(incorrectCall == 1){
 				riddle1Text();
 			} else if (incorrectCall == 2){
 				riddle2Text();
+			} else if (incorrectCall == 3){
+				riddle3Text();
 			}
 		}, 2500);
 	}
 
-	// empty the array after each icon is clicked
+	function loseLife(livesLost){
+		$lives.splice(($lives.length -livesLost), 1, "X");
+
+		$('#lives').html($lives.join(" "));
+	}
+
+	// empty the array of first item after each icon is clicked
 	function shiftArray($riddleCount, $username, $frame){
 		$('.display-message').html(messageOrder[0]);
 		messageOrder.shift();
 		if (messageOrder.length === 0){
 			endOfRiddle($riddleCount, $username);
 		};
-		//turn off frame
-		$frame.off('click');
 	}
 
 	// set up screen for next riddle
