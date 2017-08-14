@@ -1,12 +1,116 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Sparta Core Project 1</title>
-</head>
-<body>
-	<header>
-		<h1>Sparta Core Project 1</h1>
-	</header>
+	<head>
+		<!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<script
+  			src="http://code.jquery.com/jquery-3.2.1.js"
+  			integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  			crossorigin="anonymous"></script>
+  		<script type="text/javascript" src="app.js"></script>
+		<title>Sparta Core Project 1</title>
+	</head>
+	<body>
+		<!-- Home Screen -->
+		<section>
+			<div class="home-wrapper">
+				<header>Escape Room</header>
+				<section class="instructions">
+					<p> 
+						Your neighbour Susan calls you over for tea. Things are going well until you arrive
+						back from the bathroom to find Susan nowhere in sight, and the living room door locked behind
+						you.
+					</p>
+					<p>
+						"Find the objects that solve my riddles and i'll let you out," she calls from behind the door.
+						Not again, Susan.
+					</p>
+				</section>
+				<label>Name:</label>
+				<input type="text" name="user">
+				<button id="startBtn">Start</button>
+  			</div>
+		</section>
+		
+		<!-- Game Screen -->
+		<section>
+			<div class="game-wrapper">
+				<h1 id="timer"><time>00:00:00</time></h1>
 
-</body>
+				<div class="riddle-banner">
+					<h1 class="display-message">"What goes up the chimney down, but can't go down the chimney up? "</h1>
+				</div>
+
+				<section class="items">
+					<section class="objects-left">
+						<section class="frames">
+							<img id="frame1" src="objects/frame1.png">
+							<img id="frame2" src="objects/frame2.png">
+							<img id="frame3" src="objects/frame3.png">
+						</section>
+						<section class="table">
+							<img src="objects/wine.png">
+							<img src="objects/table.png">
+							<img src="objects/chair.png">
+						</section>
+					</section>
+					<section class="objects-center-left">
+						<section class="on-wall">
+							<img src="objects/lamp.png">
+							<img id="shelf" src="objects/shelf.png">
+						</section>
+						<section class="on-floor">
+							<img src="objects/cactus.png">
+						</section>
+					</section>
+					<section class="objects-center-right">
+						<section id="bookshelf">
+							<img src="objects/bookshelf.png">
+						</section>
+					</section>
+					<section id="umbrella">
+						<img src="objects/umbrella.png">
+					</section>
+					<section class="objects-right">
+						<section id="window">
+							<img src="objects/window.png">
+						</section>
+						<section id="couch">
+							<img src="objects/couch.png">
+						</section>
+					
+					
+				</section>
+				<footer class="lives">
+					
+				</footer>
+			</div>
+		</section>
+
+		<!-- Success Screen -->
+		<section>
+			<div class="success-wrapper">
+				<h1>Success!</h1>
+				<button id="leaderboardBtn">Leaderboard</button>
+			</div>
+		</section>
+
+
+		<!-- Leaderboard -->
+		<section>
+			<div class="leaderboard-wrapper">
+				<h1>Leaderboard</h1>
+				<section class="list">
+					<h2>Time taken</h2>
+					<section id="time-list">
+						User Time
+					</section>
+				</section>
+				
+				
+			</div>
+		</section>
+
+	</body>
 </html>

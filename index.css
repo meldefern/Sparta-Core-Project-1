@@ -1,0 +1,101 @@
+body {
+	font-family: 'Inconsolata', monospace;
+	color: #526262;
+}
+
+/*--------------------------------------------------*/
+
+.home-wrapper, .success-wrapper, .leaderboard-wrapper {
+	background-color: #51BDDA;
+	padding: 100px;
+	margin: 0 auto;
+	height: 600px;
+}
+
+.instructions {
+	background-color: #FFCD26;
+	width: 730px;
+}
+
+.home-wrapper header {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+/*------------------------------------------------*/
+
+.game-wrapper {
+	background-image: url('roomBG2.jpg');
+	background-repeat: repeat-x;
+	background-size: contain;
+	height: 730px;
+}
+
+div.riddle-banner {
+	margin: 0 auto;
+	background-color: #5DBCD2;
+	max-width: 850px;
+	height: 180px;
+
+}
+.riddle-banner h1 {
+	font-size: 40px
+}
+
+.objects-left, .objects-center-left, .objects-center-right, #umbrella, .objects-right {
+	display: inline-block;
+	float: left;
+	padding-left: 70px;
+}
+
+.objects-left {
+	margin-top: 30px;
+}
+
+.objects-center-left {
+	margin-top:100px;
+}
+
+.objects-center-right {
+	/*clear: left;*/
+	display: block;
+	margin-top: 100px;
+	margin-left: 10px
+}
+
+.objects-right {
+	margin-top: 50px;
+	padding-left: 20px;
+}
+
+#umbrella {
+	margin-top: 300px;
+	padding-left: 0;
+}
+
+.frames, .table {
+	margin-top: 100px;
+}
+
+.frames {
+	margin-left: 55px;
+}
+
+.on-wall, #bookshelf {
+	margin-top: 50px;
+}
+
+#window, #couch {
+	margin-top: 30px;
+}
+
+.on-floor {
+	margin-left: 200px;
+	margin-top: 80px;
+}
+
+/*-----------------------------------------------*/
+
+section#name-list, section#time-list {
+	display: inline-block;
+}
