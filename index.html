@@ -36,7 +36,7 @@
 		<!-- Game Screen -->
 		<section>
 			<div class="game-wrapper">
-				<h1 id="timer"><time>00:00:00</time></h1>
+				<h1 id="timer"><time>0</time></h1>
 
 				<div class="riddle-banner">
 					<h1 class="display-message">"What goes up the chimney down, but can't go down the chimney up? "</h1>
@@ -50,9 +50,9 @@
 							<img id="frame3" src="objects/frame3.png">
 						</section>
 						<section class="table">
-							<img src="objects/wine.png">
-							<img src="objects/table.png">
-							<img src="objects/chair.png">
+							<img id="wine" src="objects/wine.png">
+							<img id="kitchenTable" src="objects/table.png">
+							<img id="chair" src="objects/chair.png">
 						</section>
 					</section>
 					<section class="objects-center-left">
@@ -61,7 +61,8 @@
 							<img id="shelf" src="objects/shelf.png">
 						</section>
 						<section class="on-floor">
-							<img src="objects/cactus.png">
+							<img id="cat" src="objects/cat.png">
+							<img id="cactus" src="objects/cactus.png">
 						</section>
 					</section>
 					<section class="objects-center-right">
@@ -79,11 +80,10 @@
 						<section id="couch">
 							<img src="objects/couch.png">
 						</section>
-					
-					
+					</section>
 				</section>
-				<footer class="lives">
-					
+				<footer>
+					<h1 id="lives"></h1>
 				</footer>
 			</div>
 		</section>
@@ -93,6 +93,14 @@
 			<div class="success-wrapper">
 				<h1>Success!</h1>
 				<button id="leaderboardBtn">Leaderboard</button>
+			</div>
+		</section>
+
+		<!-- Game Over Screen -->
+		<section>
+			<div class="gameover-wrapper">
+				<h1>Game Over!</h1>
+				<button id="restartBtn">Restart</button>
 			</div>
 		</section>
 
@@ -106,9 +114,8 @@
 					<section id="time-list">
 						User Time
 					</section>
+					<button id="playAgainBtn">Play Again</button>
 				</section>
-				
-				
 			</div>
 		</section>
 
