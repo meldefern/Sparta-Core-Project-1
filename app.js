@@ -22,7 +22,7 @@ $(function(event){
 	// reset riddle after incorrectcalls
 	var incorrectCall = 1;
 
-	var $lives = ["lives ", 0, 0, 0, 0, 0];
+	var $lives = ["lives ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var livesLost = 0;
 	
 	// setup event listener for start button
@@ -99,61 +99,129 @@ $(function(event){
 	}
 
 	function riddle3EventListeners($riddleCount, $username){
-		// setup correct room object event listeners
-		var $userAnswer = []
-
+		var $value = '';
 		$('#wine').click(function(){
 			$('.display-message').html('red');
-			pushArray($userAnswer, 'wine', $username, $riddleCount);
-		})
+			$value = $(this).attr('id');
+			compareInRiddle3($value);
+		});
+
 		$('#cat').click(function(){
 			$('.display-message').html('yellow');
-			pushArray($userAnswer, 'cat', $username, $riddleCount);
-		})
+			$value = $(this).attr('id');
+			compareInRiddle3($value);
+		});
+
 		$('#cactus').click(function(){
 			$('.display-message').html('green');
-			pushArray($userAnswer, 'cactus', $username, $riddleCount);
-		})
+			$value = $(this).attr('id');
+			compareInRiddle3($value);
+		});
+
 		$('#window').click(function(){
 			$('.display-message').html('blue');
-			pushArray($userAnswer, 'window', $username, $riddleCount)
-
+			$value = $(this).attr('id');
+			compareInRiddle3($value, $riddleCount, $username);
 		})
 	}
 
-	function pushArray($userAnswer, element, $username, $riddleCount){
-		$userAnswer.push(element);
-
-		//if ($userAnswer.length === 4){
-			comparisonRiddle3($userAnswer, $username, $riddleCount);
-		//}
-	}
-
-	function comparisonRiddle3($userAnswer, $username, $riddleCount){
+	var answerArray = [];
+	var index = answerArray.length;
+	function compareInRiddle3($value, $riddleCount, $username){
+		console.log($value)
 		var $solution = ['wine', 'cat', 'cactus', 'window'];
-		var match = 0;
-		console.log('comp', $userAnswer)
-		for (var i = 0; i < $userAnswer.length; i++){
-			if ($userAnswer[i] === $solution[i]){
-				match++;
-				console.log('match', match)
-				if (match === 4){
-					$('.display-message').html("well done!");
-					endOfRiddle($riddleCount, $username);
-				}
-			} else {
-				//resetToCorrectRiddle();
-				resetArray($userAnswer, $riddleCount, $username);
+		console.log('before added', answerArray)
+
+		if ($value === $solution[index]){
+			answerArray.push($value);
+			index++;
+			if (index === 4) {
+			endOfRiddle($riddleCount, $username);
 			}
+		} else {
+			answerArray = [];
+			index = answerArray.length;
+			resetToCorrectRiddle();
+
 		}
-		console.log($userAnswer)
+
+		console.log('after added', answerArray);
+
 		
 	}
+	// 	// setup correct room object event listeners
+	// 	var $userAnswer = []
+	// 	// console.log('1st', $userAnswer);
+
+	// 	$('#wine').click(function(){
+	// 		$('.display-message').html('red');
+	// 		pushArray($userAnswer, 'wine', $username, $riddleCount);
+	// 	})
+	// 	$('#cat').click(function(){
+	// 		$('.display-message').html('yellow');
+	// 		pushArray($userAnswer, 'cat', $username, $riddleCount);
+	// 	})
+	// 	$('#cactus').click(function(){
+	// 		console.log('clicked');
+	// 		$('.display-message').html('green');
+	// 		pushArray($userAnswer, 'cactus', $username, $riddleCount);
+	// 	})
+	// 	$('#window').click(function(){
+	// 		$('.display-message').html('blue');
+	// 		pushArray($userAnswer, 'window', $username, $riddleCount)
+
+	// 	})
+	// }
+
+	// function pushArray($userAnswer, element, $username, $riddleCount){
+	// 	// console.log('2nd', $userAnswer);
+	// 	$userAnswer.push(element);
+	// 	console.log('3rd', $userAnswer);
+
+	// 	comparisonRiddle3($userAnswer, $username, $riddleCount);
+	// }
+
+	// function comparisonRiddle3($userAnswer, $username, $riddleCount){
+	// 	var $solution = ['wine', 'cat', 'cactus', 'window'];
+	// 	var match = 0;
+	// 	var resetCalled = false;
+	// 	var answer = $userAnswer;
+	// 	// console.log('comp', $userAnswer);
+	// 	// console.log('4th', $userAnswer);
+
+	// 	for (var i = 0; i < answer.length; i++){
+	// 		if (answer[i] === $solution[i]){
+	// 			match++;
+	// 			console.log('match', match)
+	// 			if (match === 4){
+	// 				$('.display-message').html("well done!");
+	// 				endOfRiddle($riddleCount, $username);
+	// 			}
+	// 		} else {
+	// 			answer = [];
+	// 			console.log('--------------------',answer);
+
+	// 			riddle3EventListeners($riddleCount, $username);
+	// 			resetToCorrectRiddle();
+	// 			resetCalled = true;
+
+	// 		}
+
+	// 		//else if (match == 0) {
+	// 		// // 	comparisonRiddle3($userAnswer, $username, $riddleCount);
+
+	// 		// } else {
+	// 		// 	riddle3EventListeners($riddleCount, $username)
+	// 		// 	resetToCorrectRiddle();
+	// 		// }
+	// 	}
+	// 	console.log('End of loop', answer);
+		
+	// }
 	
-	function resetArray($userAnswer, $riddleCount, $username){
-		$userAnswer = [];
-		riddle3EventListeners($riddleCount, $username);
-	}
+	// function resetArray($userAnswer, $riddleCount, $username){
+	// 	$userAnswer = [];
+	// }
 
 
 	function generalEventListeners(){
@@ -180,7 +248,6 @@ $(function(event){
 			if (incorrectCall < 3){
 				resetToCorrectRiddle();
 			}
-			
 		});
 
 		$('#chair').click(function(){
@@ -192,9 +259,10 @@ $(function(event){
 	}
 
 	function resetToCorrectRiddle(){
-		// timeout function for 2.5 seconds
+		// timeout function for 1.5 seconds
 		livesLost++
-		if (livesLost === 5) {
+		console.log("lost", livesLost);
+		if (livesLost === 12) {
 			$('.game-wrapper').hide();
 			$('.gameover-wrapper').show();
 			restartButtonEventListener();
