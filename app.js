@@ -25,6 +25,10 @@ $(function(event){
 	var $lives = ["lives ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var livesLost = 0;
 	
+	// initialise empty array for comparisons in riddle3
+	var answerArray = [];
+	var index = answerArray.length;
+
 	// setup event listener for start button
 	function start($riddleCount){
 		$('#startBtn').click(function(){
@@ -89,8 +93,9 @@ $(function(event){
 		});
 	}
 
-	// empty the array of first item after each icon is clicked
+	
 	function shiftArray($riddleCount, $username, $frame){
+		// empty the array of first item after each icon is clicked
 		$('.display-message').html(messageOrder[0]);
 		messageOrder.shift();
 		if (messageOrder.length === 0){
@@ -99,6 +104,7 @@ $(function(event){
 	}
 
 	function riddle3EventListeners($riddleCount, $username){
+		// compare item clicked before comparing to solution array
 		var $value = '';
 		$('#wine').click(function(){
 			$('.display-message').html('red');
@@ -124,104 +130,25 @@ $(function(event){
 			compareInRiddle3($value, $riddleCount, $username);
 		})
 	}
-
-	var answerArray = [];
-	var index = answerArray.length;
+	
 	function compareInRiddle3($value, $riddleCount, $username){
-		console.log($value)
 		var $solution = ['wine', 'cat', 'cactus', 'window'];
-		console.log('before added', answerArray)
 
+		// if matched, add to array, increment index
 		if ($value === $solution[index]){
 			answerArray.push($value);
 			index++;
+			// check if all matches are made
 			if (index === 4) {
 			endOfRiddle($riddleCount, $username);
 			}
 		} else {
+			// reset values
 			answerArray = [];
 			index = answerArray.length;
 			resetToCorrectRiddle();
-
 		}
-
-		console.log('after added', answerArray);
-
-		
 	}
-	// 	// setup correct room object event listeners
-	// 	var $userAnswer = []
-	// 	// console.log('1st', $userAnswer);
-
-	// 	$('#wine').click(function(){
-	// 		$('.display-message').html('red');
-	// 		pushArray($userAnswer, 'wine', $username, $riddleCount);
-	// 	})
-	// 	$('#cat').click(function(){
-	// 		$('.display-message').html('yellow');
-	// 		pushArray($userAnswer, 'cat', $username, $riddleCount);
-	// 	})
-	// 	$('#cactus').click(function(){
-	// 		console.log('clicked');
-	// 		$('.display-message').html('green');
-	// 		pushArray($userAnswer, 'cactus', $username, $riddleCount);
-	// 	})
-	// 	$('#window').click(function(){
-	// 		$('.display-message').html('blue');
-	// 		pushArray($userAnswer, 'window', $username, $riddleCount)
-
-	// 	})
-	// }
-
-	// function pushArray($userAnswer, element, $username, $riddleCount){
-	// 	// console.log('2nd', $userAnswer);
-	// 	$userAnswer.push(element);
-	// 	console.log('3rd', $userAnswer);
-
-	// 	comparisonRiddle3($userAnswer, $username, $riddleCount);
-	// }
-
-	// function comparisonRiddle3($userAnswer, $username, $riddleCount){
-	// 	var $solution = ['wine', 'cat', 'cactus', 'window'];
-	// 	var match = 0;
-	// 	var resetCalled = false;
-	// 	var answer = $userAnswer;
-	// 	// console.log('comp', $userAnswer);
-	// 	// console.log('4th', $userAnswer);
-
-	// 	for (var i = 0; i < answer.length; i++){
-	// 		if (answer[i] === $solution[i]){
-	// 			match++;
-	// 			console.log('match', match)
-	// 			if (match === 4){
-	// 				$('.display-message').html("well done!");
-	// 				endOfRiddle($riddleCount, $username);
-	// 			}
-	// 		} else {
-	// 			answer = [];
-	// 			console.log('--------------------',answer);
-
-	// 			riddle3EventListeners($riddleCount, $username);
-	// 			resetToCorrectRiddle();
-	// 			resetCalled = true;
-
-	// 		}
-
-	// 		//else if (match == 0) {
-	// 		// // 	comparisonRiddle3($userAnswer, $username, $riddleCount);
-
-	// 		// } else {
-	// 		// 	riddle3EventListeners($riddleCount, $username)
-	// 		// 	resetToCorrectRiddle();
-	// 		// }
-	// 	}
-	// 	console.log('End of loop', answer);
-		
-	// }
-	
-	// function resetArray($userAnswer, $riddleCount, $username){
-	// 	$userAnswer = [];
-	// }
 
 
 	function generalEventListeners(){
@@ -253,13 +180,10 @@ $(function(event){
 		$('#chair').click(function(){
 			$('.display-message').html("Not quite")
 			resetToCorrectRiddle();
-		});
-		
-		
+		});	
 	}
 
 	function resetToCorrectRiddle(){
-		// timeout function for 1.5 seconds
 		livesLost++
 		console.log("lost", livesLost);
 		if (livesLost === 12) {
@@ -269,7 +193,8 @@ $(function(event){
 		} else {
 			loseLife(livesLost);
 		}
-		// 
+		// timeout function for 1.5 seconds
+		// reset text
 		setTimeout(function(){
 			if(incorrectCall == 1){
 				riddle1Text();
@@ -297,8 +222,6 @@ $(function(event){
 		$('#lives').html($lives.join(" "));
 	}
 
-	
-
 	// set up screen for next riddle
 	function endOfRiddle($riddleCount, $username){
 		setTimeout(function(){
@@ -306,7 +229,6 @@ $(function(event){
 		}, 2000);
 	}
 		
-
 	function generateRiddle($riddleCount, $username){
 		$riddleCount ++;
 		// incorrectCall to reset display value to correct display
@@ -320,7 +242,7 @@ $(function(event){
 			nextRiddle($riddleCount, $username);
 		};
 
-		if($riddleCount === 3){
+		if ($riddleCount === 3) {
 			riddle3Text();
 			nextRiddle($riddleCount, $username);
 		};
@@ -333,7 +255,6 @@ $(function(event){
 			window.clearInterval(interval);
 			showLeaderboard(seconds+'seconds', $username);	
 		};
-		console.log('riddleCount ', $riddleCount)
 	}
 
 	function startTimer(){
@@ -359,7 +280,6 @@ $(function(event){
 		$('.display-message').html(newString.join(", "));
 	}
 
-
 	function showLeaderboard(elapsed, $username){
 		$('#leaderboardBtn').click(function(){
 			$('.success-wrapper').hide();
@@ -369,9 +289,7 @@ $(function(event){
 		$('#time-list').html($username+': '+elapsed);
 		// Ask user to play again
 		restartButtonEventListener();
-		
 	}
-
 
 	start($riddleCount);
 })
