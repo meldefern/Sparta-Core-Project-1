@@ -19,6 +19,7 @@ $(function(event){
 	// message array for riddle2
 	var messageOrder = ["is that all?", "go on...", "you got it dude!"];
 
+	// reset riddle after incorrectcalls
 	var incorrectCall = 1;
 
 	var $lives = ["lives ", 0, 0, 0, 0, 0];
@@ -88,16 +89,71 @@ $(function(event){
 		});
 	}
 
+	// empty the array of first item after each icon is clicked
+	function shiftArray($riddleCount, $username, $frame){
+		$('.display-message').html(messageOrder[0]);
+		messageOrder.shift();
+		if (messageOrder.length === 0){
+			endOfRiddle($riddleCount, $username);
+		};
+	}
+
 	function riddle3EventListeners($riddleCount, $username){
 		// setup correct room object event listeners
-		var $solution = [$('#window'), $('#wine'), $('#cactus'), $('#cat')];
+		var $userAnswer = []
 
-		for (var i = 0; i < $solution.length; i++){
-			
+		$('#wine').click(function(){
+			$('.display-message').html('red');
+			pushArray($userAnswer, 'wine', $username, $riddleCount);
+		})
+		$('#cat').click(function(){
+			$('.display-message').html('yellow');
+			pushArray($userAnswer, 'cat', $username, $riddleCount);
+		})
+		$('#cactus').click(function(){
+			$('.display-message').html('green');
+			pushArray($userAnswer, 'cactus', $username, $riddleCount);
+		})
+		$('#window').click(function(){
+			$('.display-message').html('blue');
+			pushArray($userAnswer, 'window', $username, $riddleCount)
+
+		})
+	}
+
+	function pushArray($userAnswer, element, $username, $riddleCount){
+		$userAnswer.push(element);
+
+		//if ($userAnswer.length === 4){
+			comparisonRiddle3($userAnswer, $username, $riddleCount);
+		//}
+	}
+
+	function comparisonRiddle3($userAnswer, $username, $riddleCount){
+		var $solution = ['wine', 'cat', 'cactus', 'window'];
+		var match = 0;
+		console.log('comp', $userAnswer)
+		for (var i = 0; i < $userAnswer.length; i++){
+			if ($userAnswer[i] === $solution[i]){
+				match++;
+				console.log('match', match)
+				if (match === 4){
+					$('.display-message').html("well done!");
+					endOfRiddle($riddleCount, $username);
+				}
+			} else {
+				//resetToCorrectRiddle();
+				resetArray($userAnswer, $riddleCount, $username);
+			}
 		}
+		console.log($userAnswer)
 		
-
-		}
+	}
+	
+	function resetArray($userAnswer, $riddleCount, $username){
+		$userAnswer = [];
+		riddle3EventListeners($riddleCount, $username);
+	}
 
 
 	function generalEventListeners(){
@@ -113,17 +169,18 @@ $(function(event){
 			// reset riddle text
 			resetToCorrectRiddle();
 		})
-
 		// setup incorrect shelf listeners
 		$('#shelf').click(function(){
 			$('.display-message').html('Not us!');
 			resetToCorrectRiddle();
 		});
-
 		// set incorrect wine listener
 		$('#wine').click(function(){
 			$('.display-message').html('Wine is always the answer');
-			resetToCorrectRiddle();
+			if (incorrectCall < 3){
+				resetToCorrectRiddle();
+			}
+			
 		});
 
 		$('#chair').click(function(){
@@ -144,6 +201,7 @@ $(function(event){
 		} else {
 			loseLife(livesLost);
 		}
+		// 
 		setTimeout(function(){
 			if(incorrectCall == 1){
 				riddle1Text();
@@ -152,7 +210,7 @@ $(function(event){
 			} else if (incorrectCall == 3){
 				riddle3Text();
 			}
-		}, 2500);
+		}, 1500);
 	}
 
 	function restartButtonEventListener(){
@@ -171,20 +229,13 @@ $(function(event){
 		$('#lives').html($lives.join(" "));
 	}
 
-	// empty the array of first item after each icon is clicked
-	function shiftArray($riddleCount, $username, $frame){
-		$('.display-message').html(messageOrder[0]);
-		messageOrder.shift();
-		if (messageOrder.length === 0){
-			endOfRiddle($riddleCount, $username);
-		};
-	}
+	
 
 	// set up screen for next riddle
 	function endOfRiddle($riddleCount, $username){
 		setTimeout(function(){
 			generateRiddle($riddleCount, $username);
-		}, 1500);
+		}, 2000);
 	}
 		
 
@@ -201,13 +252,12 @@ $(function(event){
 			nextRiddle($riddleCount, $username);
 		};
 
-		// if($riddleCount === 3){
-		// 	riddle3Text();
-		// 	nextRiddle($riddleCount, $username);
-		// };
-
-		//CHANGE RIDDLE COUNT BACK TO 4 HERE WHEN DONE
-		if ($riddleCount === 3) {
+		if($riddleCount === 3){
+			riddle3Text();
+			nextRiddle($riddleCount, $username);
+		};
+		
+		if ($riddleCount === 4) {
 			var end = new Date();
 			$('.game-wrapper').hide();
 			$('.success-wrapper').show();
@@ -215,6 +265,7 @@ $(function(event){
 			window.clearInterval(interval);
 			showLeaderboard(seconds+'seconds', $username);	
 		};
+		console.log('riddleCount ', $riddleCount)
 	}
 
 	function startTimer(){
