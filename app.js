@@ -65,7 +65,7 @@ $(function(event){
 		// setup correct room object event listeners
 		$('#umbrella').click(function(){
 			// update banner message
-			$('.display-message').html('CORRECT!');
+			$('.display-message').html('Correct!');
 			// call function to generate new riddle
 			$('#umbrella').off('click');
 			endOfRiddle($riddleCount, $username);
@@ -140,6 +140,7 @@ $(function(event){
 		if (livesLost === 5) {
 			$('.game-wrapper').hide();
 			$('.gameover-wrapper').show();
+			restartButtonEventListener();
 		} else {
 			loseLife(livesLost);
 		}
@@ -154,7 +155,17 @@ $(function(event){
 		}, 2500);
 	}
 
+	function restartButtonEventListener(){
+		$('#restartBtn').click(function(){
+			location.reload();
+		});
+		$('#playAgainBtn').click(function(){
+			location.reload();
+		});
+	}
+
 	function loseLife(livesLost){
+		//position in array, delete 1 item, add X
 		$lives.splice(($lives.length -livesLost), 1, "X");
 
 		$('#lives').html($lives.join(" "));
@@ -181,18 +192,22 @@ $(function(event){
 		$riddleCount ++;
 		// incorrectCall to reset display value to correct display
 		incorrectCall++;
+		if ($riddleCount === 1) {
+			riddle1Text();
+			nextRiddle($riddleCount, $username);
+		};
 		if ($riddleCount === 2) {
 			riddle2Text();
 			nextRiddle($riddleCount, $username);
 		};
 
-		if($riddleCount === 3){
-			riddle3Text();
-			nextRiddle($riddleCount, $username);
-		};
+		// if($riddleCount === 3){
+		// 	riddle3Text();
+		// 	nextRiddle($riddleCount, $username);
+		// };
 
 		//CHANGE RIDDLE COUNT BACK TO 4 HERE WHEN DONE
-		if ($riddleCount === 4) {
+		if ($riddleCount === 3) {
 			var end = new Date();
 			$('.game-wrapper').hide();
 			$('.success-wrapper').show();
@@ -233,6 +248,9 @@ $(function(event){
 		});
 		// add username and time taken to board
 		$('#time-list').html($username+': '+elapsed);
+		// Ask user to play again
+		restartButtonEventListener();
+		
 	}
 
 
