@@ -47,56 +47,79 @@ div.riddle-banner {
 	display: inline-block;
 	float: left;
 	padding-left: 65px;
+
+}
+
+#wine, #kitchenTable, #chair, #lamp, #shelf, #cat, #cactus, #bookshelf, #umbrella, #window, #couch {
+	position: absolute;
 }
 
 .objects-left {
 	margin-top: 30px;
 }
 
-.objects-center-left {
-	margin-top:100px;
-	padding-left: 40px;
+#kitchenTable {
+	margin-top: 200px;
 }
 
-.objects-center-right {
-	display: block;
+#wine {
+	margin-top: 130px;
+	margin-left: 30px;
+}
+
+#chair {
+	margin-top: 170px;
+	margin-left: 250px;
+}
+
+.frames {
+	margin-top: 40px;
+	margin-left: 50px
+}
+
+#lamp {
+	margin-top: 120px;
+	margin-left: 70px;
+}
+
+#shelf {
+	margin-top:160px;
+	margin-left: 70px;
+}
+
+#couch {
+	margin-top: 280px;
+	margin-left: 650px;
+}
+
+#bookshelf {
 	margin-top: 100px;
-	margin-left: 10px
 }
 
-.objects-right {
-	margin-top: 50px;
-	padding-left: 20px;
+#cat {
+	margin-top: 370px;
+	margin-left: 20px;
+}
+
+#cactus {
+	margin-top: 305px;
+	margin-left: 250px
+}
+
+#bookshelf {
+	margin-top: 165px;
+	margin-left: 350px;
 }
 
 #umbrella {
 	margin-top: 300px;
-	padding-left: 0;
+	margin-left: 575px;
+	position: absolute;
 }
 
-.frames, .table {
-	margin-top: 100px;
-}
-
-.frames {
-	margin-left: 55px;
-}
-
-.on-wall, #bookshelf {
-	margin-top: 50px;
-}
-
-#window, #couch {
-	margin-top: 30px;
-}
-
-.on-floor {
-	margin-left: 150px;
+#window {
+	margin-left: 720px;
 	margin-top: 80px;
-}
-
-#cat {
-	size
 }
 
 /*-----------------------------------------------*/

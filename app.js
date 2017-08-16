@@ -22,7 +22,7 @@ $(function(event){
 	// reset riddle after incorrectcalls
 	var incorrectCall = 1;
 
-	var $lives = ["lives ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var $lives = ["lives ", 0, 0, 0, 0, 0];
 	var livesLost = 0;
 	
 	// initialise empty array for comparisons in riddle3
@@ -40,7 +40,7 @@ $(function(event){
 	        $('.home-wrapper').hide();
 	        // function to show gameplay div
 	        $('.game-wrapper').show();
-	        generalEventListeners();
+	        generalEventListeners($riddleCount, $username);
 	        nextRiddle($riddleCount, $username);
 
 	        $('#lives').html($lives.join(" "));
@@ -71,6 +71,8 @@ $(function(event){
 		$('#umbrella').click(function(){
 			// update banner message
 			$('.display-message').html('Correct!');
+			$("#umbrella").animate({left: "+=10"}, 500);
+    		$("#umbrella").animate({left: "-=10"}, 500);
 			// call function to generate new riddle
 			$('#umbrella').off('click');
 			endOfRiddle($riddleCount, $username);
@@ -109,19 +111,19 @@ $(function(event){
 		$('#wine').click(function(){
 			$('.display-message').html('red');
 			$value = $(this).attr('id');
-			compareInRiddle3($value);
+			compareInRiddle3($value, $riddleCount, $username);
 		});
 
 		$('#cat').click(function(){
 			$('.display-message').html('yellow');
 			$value = $(this).attr('id');
-			compareInRiddle3($value);
+			compareInRiddle3($value, $riddleCount, $username);
 		});
 
 		$('#cactus').click(function(){
 			$('.display-message').html('green');
 			$value = $(this).attr('id');
-			compareInRiddle3($value);
+			compareInRiddle3($value, $riddleCount, $username);
 		});
 
 		$('#window').click(function(){
@@ -129,6 +131,19 @@ $(function(event){
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		})
+
+		// compare incorrect elements
+		$('#kitchenTable').click(function(){
+			riddle3IncorrectEventListeners($('kitchenTable'), $riddleCount, $username);
+		})
+
+		
+	}
+
+	function riddle3IncorrectEventListeners($value, $riddleCount, $username){
+		$('.display-message').html('no');
+		$value = $(this).attr('id');
+		compareInRiddle3($value, $riddleCount, $username);
 	}
 	
 	function compareInRiddle3($value, $riddleCount, $username){
@@ -151,28 +166,36 @@ $(function(event){
 	}
 
 
-	function generalEventListeners(){
+	function generalEventListeners($riddleCount, $username){
 		// setup incorrect table listener
 		$('#kitchenTable').click(function(){
-			$('.display-message').html('Nope');
-			// reset riddle text
-			resetToCorrectRiddle();
+			if (incorrectCall != 3){
+				$('.display-message').html('Nope');
+				// reset riddle text
+				resetToCorrectRiddle();
+			} else {
+				riddle3IncorrectEventListeners($('kitchenTable'), $riddleCount, $username);
+			}
 		})
 		// setup incorrect couch listener
 		$('#couch').click(function(){
-			$('.display-message').html('You can\'t be serious...');
-			// reset riddle text
-			resetToCorrectRiddle();
+			if (incorrectCall != 3){
+				$('.display-message').html('You can\'t be serious...');
+				// reset riddle text
+				resetToCorrectRiddle();
+			}
 		})
 		// setup incorrect shelf listeners
 		$('#shelf').click(function(){
-			$('.display-message').html('Not us!');
-			resetToCorrectRiddle();
+			if (incorrectCall != 3){
+				$('.display-message').html('Not us!');
+				resetToCorrectRiddle();
+			}
 		});
 		// set incorrect wine listener
 		$('#wine').click(function(){
-			$('.display-message').html('Wine is always the answer');
-			if (incorrectCall < 3){
+			if (incorrectCall != 3){
+				$('.display-message').html('Wine is always the answer');
 				resetToCorrectRiddle();
 			}
 		});
@@ -186,11 +209,12 @@ $(function(event){
 	function resetToCorrectRiddle(){
 		livesLost++
 		console.log("lost", livesLost);
-		if (livesLost === 12) {
+		if (livesLost === 5) {
 			$('.game-wrapper').hide();
 			$('.gameover-wrapper').show();
 			restartButtonEventListener();
 		} else {
+			console.log("losing life")
 			loseLife(livesLost);
 		}
 		// timeout function for 1.5 seconds
@@ -233,6 +257,7 @@ $(function(event){
 		$riddleCount ++;
 		// incorrectCall to reset display value to correct display
 		incorrectCall++;
+		console.log("incorrectCall", incorrectCall)
 		if ($riddleCount === 1) {
 			riddle1Text();
 			nextRiddle($riddleCount, $username);
