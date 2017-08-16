@@ -139,17 +139,12 @@ $(function(event){
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		})
-
-		// compare incorrect elements
-		$('#kitchenTable').click(function(){
-			riddle3IncorrectEventListeners($('kitchenTable'), $riddleCount, $username);
-		})
-
 		
 	}
 
 	function riddle3IncorrectEventListeners($value, $riddleCount, $username){
-		$('.display-message').html('no');
+		console.log("inside riddle3EventListeners")
+		$('.display-message').html('try again');
 		$value = $(this).attr('id');
 		compareInRiddle3($value, $riddleCount, $username);
 	}
@@ -182,6 +177,7 @@ $(function(event){
 				// reset riddle text
 				resetToCorrectRiddle();
 			} else {
+				// make items clickable for riddle3
 				riddle3IncorrectEventListeners($('kitchenTable'), $riddleCount, $username);
 			}
 		})
@@ -191,6 +187,8 @@ $(function(event){
 				$('.display-message').html('You can\'t be serious...');
 				// reset riddle text
 				resetToCorrectRiddle();
+			} else {
+				riddle3IncorrectEventListeners($('couch'), $riddleCount, $username);
 			}
 		})
 		// setup incorrect shelf listeners
@@ -198,20 +196,31 @@ $(function(event){
 			if (incorrectCall != 3){
 				$('.display-message').html('Not us!');
 				resetToCorrectRiddle();
+			} else {
+				riddle3IncorrectEventListeners($('shelf'), $riddleCount, $username);
 			}
 		});
 		// set incorrect wine listener
 		$('#wine').click(function(){
 			if (incorrectCall != 3){
-				$('.display-message').html('Wine is always the answer');
+				$('.display-message').html('Wine is always the answer, but you\'re wrong');
 				resetToCorrectRiddle();
 			}
 		});
 
 		$('#chair').click(function(){
-			$('.display-message').html("Not quite")
+			$('.display-message').html('Not quite');
 			resetToCorrectRiddle();
 		});	
+
+		$('#bookshelf').click(function(){
+			$('.display-message').html('Good try');
+			resetToCorrectRiddle();
+		})
+
+		$('#lamp').click(function(){
+			$('.display-message').html('it\'s not me')
+		})
 	}
 
 	function resetToCorrectRiddle(){
@@ -300,7 +309,7 @@ $(function(event){
 	}
 	// function that displays riddle 2 text
 	function riddle2Text(){
-		$('.display-message').html('"One Score - Dancing Queen = ?"');
+		$('.display-message').html('One Score - Dancing Queen = ?');
 	}
 	// function that displays riddle 3 text
 	function riddle3Text(){
