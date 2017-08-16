@@ -71,12 +71,16 @@ $(function(event){
 		$('#umbrella').click(function(){
 			// update banner message
 			$('.display-message').html('Correct!');
-			$("#umbrella").animate({left: "+=10"}, 500);
-    		$("#umbrella").animate({left: "-=10"}, 500);
+    		animate($('#umbrella'));
 			// call function to generate new riddle
 			$('#umbrella').off('click');
 			endOfRiddle($riddleCount, $username);
 		})	
+	}
+
+	function animate($value){
+		$($value).animate({left: "+=10"}, 200);
+    	$($value).animate({left: "-=10"}, 200);
 	}
 
 	function riddle2EventListeners($riddleCount, $username){
@@ -110,24 +114,28 @@ $(function(event){
 		var $value = '';
 		$('#wine').click(function(){
 			$('.display-message').html('red');
+			animate($('#wine'));
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		});
 
 		$('#cat').click(function(){
 			$('.display-message').html('yellow');
+			animate($('#cat'));
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		});
 
 		$('#cactus').click(function(){
 			$('.display-message').html('green');
+			animate($('#cactus'));
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		});
 
 		$('#window').click(function(){
 			$('.display-message').html('blue');
+			animate($('#window'));
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		})
