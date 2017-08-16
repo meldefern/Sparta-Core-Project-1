@@ -208,6 +208,34 @@ $(function(event){
 			}
 		});
 
+		$('#cactus').click(function(){
+			if (incorrectCall != 3){
+				$('.display-message').html('you\'re technically correct, but...');
+				resetToCorrectRiddle();
+			}
+		})
+
+		$('#window').click(function(){
+			if (incorrectCall != 3){
+				$('.display-message').html('obviously... not');
+				resetToCorrectRiddle();
+			}
+		})
+
+		$('#cat').click(function(){
+			if (incorrectCall != 3){
+				$('.display-message').html('i mean you could try');
+				resetToCorrectRiddle();
+			}
+		})
+
+		$('.frames').click(function(){
+			if (incorrectCall != 2){
+				$('.display-message').html('wrong');
+				resetToCorrectRiddle();
+			}
+		})
+
 		$('#chair').click(function(){
 			$('.display-message').html('Not quite');
 			resetToCorrectRiddle();
