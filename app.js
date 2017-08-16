@@ -23,6 +23,9 @@ $(function(event){
 	var answerArray = [];
 	var index = answerArray.length;
 
+	//var replay = false;
+	//var timeoutHandle = 0;
+
 	// setup event listener for start button
 	function start($riddleCount){
 		// hide divs
@@ -259,9 +262,9 @@ $(function(event){
 		});
 	}
 
-	function resetToCorrectRiddle(){
+	function resetToCorrectRiddle(replay){
 		livesLost++;
-
+		
 		if (livesLost === 5) {
 			$('.game-wrapper').hide();
 			$('.gameover-wrapper').show();
@@ -290,12 +293,39 @@ $(function(event){
 
 		$('#playAgainBtn').click(function(){
 			location.reload();
+			//start();
+
+			// window.clearTimeout(timeoutHandle)
+			// //timeoutHandle = window.setTimeout(interval);
+			// seconds = 0;
+
+			// $('.home-wrapper').show();
+			// //count riddles, for log active objects
+			// var $riddleCount = 1;
+
+			
+
+			// // message array for riddle2
+			// var messageOrder = ["is that all?", "go on...", "you got it dude!"];
+
+			// // reset riddle after incorrectcalls
+			// var incorrectCall = 1;
+
+			// var $lives = ["lives ", 0, 0, 0, 0, 0];
+			// var livesLost = 0;
+	
+			// // initialise empty array for comparisons in riddle3
+			// var answerArray = [];
+			// var index = answerArray.length;
+
+			// replay = true;
+			// resetToCorrectRiddle(replay);
 		});
 	}
 
 	function loseLife(livesLost){
 		//position in array, delete 1 item, add X
-		$lives.splice(($lives.length -livesLost), 1, "X");
+		$lives.splice(($lives.length - livesLost), 1, "X");
 
 		$('#lives').html($lives.join(" "));
 	}
@@ -333,7 +363,7 @@ $(function(event){
 			$('.game-wrapper').hide();
 			$('.success-wrapper').show();
 
-			window.clearInterval(interval);
+			timeoutHandle = window.clearInterval(interval);
 			showLeaderboard(seconds+'seconds', $username);	
 		}
 	}
@@ -351,7 +381,7 @@ $(function(event){
 	function riddle2Text(){
 		$('.display-message').html('One Score - Dancing Queen = ?');
 	}
-	
+
 	// function that displays riddle 3 text
 	function riddle3Text(){
 		var newString = [];
@@ -364,13 +394,36 @@ $(function(event){
 		$('.display-message').html(newString.join(", "));
 	}
 
+
 	function showLeaderboard(elapsed, $username){
 		$('#leaderboardBtn').click(function(){
 			$('.success-wrapper').hide();
 			$('.leaderboard-wrapper').show();
 		});
-		// add username and time taken to board
-		$('#time-list').html($username+': '+elapsed);
+
+		// if browser allows storage
+		if (typeof(Storage) !== "undefined") {
+			localStorage.setItem($username, elapsed);
+
+			console.log(localStorage, 'localStorage')
+
+			for( var i = 0; i < localStorage.length; i++){
+				var myKey = localStorage.key(i);
+				var myValue = localStorage.getItem(localStorage.key(i));
+
+				if(myKey === $username) {
+					myKey = $username + " New";
+				}
+
+				var li = $('<li class="scores">New Score</li>');
+    			$('ul').append(li);
+    			$($('.scores').get(i)).html(myKey + ' : ' + myValue);
+			}
+		} else {
+			// manually add username and time taken to board
+    		$('#time-list').html($username+': '+elapsed);
+		}
+
 		// Ask user to play again
 		restartButtonEventListener();
 	}
