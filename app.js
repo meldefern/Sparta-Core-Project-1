@@ -1,7 +1,4 @@
 $(function(event){
-	// temp hiding
-	//$('.home-wrapper').hide();
-	//$('.game-wrapper').show();
 
 	//count riddles, for log active objects
 	var $riddleCount = 1;
@@ -22,9 +19,6 @@ $(function(event){
 	// initialise empty array for comparisons in riddle3
 	var answerArray = [];
 	var index = answerArray.length;
-
-	//var replay = false;
-	//var timeoutHandle = 0;
 
 	// setup event listener for start button
 	function start($riddleCount){
@@ -293,33 +287,6 @@ $(function(event){
 
 		$('#playAgainBtn').click(function(){
 			location.reload();
-			//start();
-
-			// window.clearTimeout(timeoutHandle)
-			// //timeoutHandle = window.setTimeout(interval);
-			// seconds = 0;
-
-			// $('.home-wrapper').show();
-			// //count riddles, for log active objects
-			// var $riddleCount = 1;
-
-			
-
-			// // message array for riddle2
-			// var messageOrder = ["is that all?", "go on...", "you got it dude!"];
-
-			// // reset riddle after incorrectcalls
-			// var incorrectCall = 1;
-
-			// var $lives = ["lives ", 0, 0, 0, 0, 0];
-			// var livesLost = 0;
-	
-			// // initialise empty array for comparisons in riddle3
-			// var answerArray = [];
-			// var index = answerArray.length;
-
-			// replay = true;
-			// resetToCorrectRiddle(replay);
 		});
 	}
 
@@ -394,7 +361,6 @@ $(function(event){
 		$('.display-message').html(newString.join(", "));
 	}
 
-
 	function showLeaderboard(elapsed, $username){
 		$('#leaderboardBtn').click(function(){
 			$('.success-wrapper').hide();
@@ -420,7 +386,7 @@ $(function(event){
     			$($('.scores').get(i)).html(myKey + ' : ' + myValue);
 			}
 		} else {
-			// manually add username and time taken to board
+			// add username and time taken directly to board
     		$('#time-list').html($username+': '+elapsed);
 		}
 
