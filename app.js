@@ -1,7 +1,4 @@
 $(function(event){
-	// temp hiding
-	//$('.home-wrapper').hide();
-	//$('.game-wrapper').show();
 
 	//count riddles, for log active objects
 	var $riddleCount = 1;
@@ -259,9 +256,9 @@ $(function(event){
 		});
 	}
 
-	function resetToCorrectRiddle(){
+	function resetToCorrectRiddle(replay){
 		livesLost++;
-
+		
 		if (livesLost === 5) {
 			$('.game-wrapper').hide();
 			$('.gameover-wrapper').show();
@@ -295,7 +292,7 @@ $(function(event){
 
 	function loseLife(livesLost){
 		//position in array, delete 1 item, add X
-		$lives.splice(($lives.length -livesLost), 1, "X");
+		$lives.splice(($lives.length - livesLost), 1, "X");
 
 		$('#lives').html($lives.join(" "));
 	}
@@ -333,7 +330,7 @@ $(function(event){
 			$('.game-wrapper').hide();
 			$('.success-wrapper').show();
 
-			window.clearInterval(interval);
+			timeoutHandle = window.clearInterval(interval);
 			showLeaderboard(seconds+'seconds', $username);	
 		}
 	}
@@ -351,7 +348,7 @@ $(function(event){
 	function riddle2Text(){
 		$('.display-message').html('One Score - Dancing Queen = ?');
 	}
-	
+
 	// function that displays riddle 3 text
 	function riddle3Text(){
 		var newString = [];
@@ -369,8 +366,30 @@ $(function(event){
 			$('.success-wrapper').hide();
 			$('.leaderboard-wrapper').show();
 		});
-		// add username and time taken to board
-		$('#time-list').html($username+': '+elapsed);
+
+		// if browser allows storage
+		if (typeof(Storage) !== "undefined") {
+			localStorage.setItem($username, elapsed);
+
+			console.log(localStorage, 'localStorage')
+
+			for( var i = 0; i < localStorage.length; i++){
+				var myKey = localStorage.key(i);
+				var myValue = localStorage.getItem(localStorage.key(i));
+
+				if(myKey === $username) {
+					myKey = $username + " New";
+				}
+
+				var li = $('<li class="scores">New Score</li>');
+    			$('ul').append(li);
+    			$($('.scores').get(i)).html(myKey + ' : ' + myValue);
+			}
+		} else {
+			// add username and time taken directly to board
+    		$('#time-list').html($username+': '+elapsed);
+		}
+
 		// Ask user to play again
 		restartButtonEventListener();
 	}
