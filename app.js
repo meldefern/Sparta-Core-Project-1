@@ -50,6 +50,68 @@ $(function(event){
 		seconds++;
 		$theTimer.html(seconds);
 	}
+
+	function startTimer(){
+		interval = setInterval(countUp, 1000);
+	}
+
+	function soundEffects(item){
+		var bookshelfAudio = new Audio('sounds/bookshelf.mp3');
+		var cactusAudio = new Audio('sounds/cactus.mp3');
+		var catAudio = new Audio('sounds/cat.mp3');
+		var chairAudio = new Audio('sounds/chair.mp3');
+		var couchAudio = new Audio('sounds/couch.mp3');
+		var frameAudio = new Audio('sounds/frame.mp3');
+		var lampAudio = new Audio('sounds/lamp.mp3');
+		var shelfAudio = new Audio('sounds/shelf.mp3');
+		var tableAudio = new Audio('sounds/table.mp3');
+		var umbrellaAudio = new Audio('sounds/umbrella.mp3');
+		var windowAudio = new Audio('sounds/window.mp3');
+		var wineAudio = new Audio('sounds/wine.mp3');
+
+		switch(item){
+			case 'bookshelf':
+				bookshelfAudio.play();
+				break;
+			case 'cactus':
+				cactusAudio.play();
+				break;
+			case 'cat':
+				catAudio.play();
+				break;
+			case 'chair':
+				chairAudio.play();
+				break;
+			case 'couch':
+				couchAudio.play();
+				break;
+			case 'frames':
+				frameAudio.play();
+				break;
+			case 'lamp':
+				lampAudio.play();
+				break;
+			case 'shelf':
+				shelfAudio.play();
+				break;
+			case 'table':
+				tableAudio.play();
+				break;
+			case 'umbrella':
+				umbrellaAudio.play();
+				break;
+			case 'window':
+				windowAudio.play();
+				break;
+			case 'wine':
+				wineAudio.play();	
+		}
+	}
+
+	function animate($value){
+		$($value).animate({left: "+=10"}, 200);
+    	$($value).animate({left: "-=10"}, 200);
+	}
 	
 	function nextRiddle($riddleCount, $username){
 		// set up correct and incorrect event listeners for riddles
@@ -76,11 +138,6 @@ $(function(event){
 			$('#umbrella').off('click');
 			endOfRiddle($riddleCount, $username);
 		})	
-	}
-
-	function animate($value){
-		$($value).animate({left: "+=10"}, 200);
-    	$($value).animate({left: "-=10"}, 200);
 	}
 
 	function riddle2EventListeners($riddleCount, $username){
@@ -174,6 +231,8 @@ $(function(event){
 	function generalEventListeners($riddleCount, $username){
 		// setup incorrect table listener
 		$('#kitchenTable').click(function(){
+			soundEffects('table');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('Nope');
 				// reset riddle text
@@ -186,6 +245,8 @@ $(function(event){
 
 		// setup incorrect couch listener
 		$('#couch').click(function(){
+			soundEffects('couch');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('You can\'t be serious...');
 				// reset riddle text
@@ -197,6 +258,8 @@ $(function(event){
 
 		// setup incorrect shelf listeners
 		$('#shelf').click(function(){
+			soundEffects('shelf');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('Not us!');
 				resetToCorrectRiddle();
@@ -207,6 +270,8 @@ $(function(event){
 
 		// set incorrect wine listener
 		$('#wine').click(function(){
+			soundEffects('wine');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('Wine is always the answer, but you\'re wrong');
 				resetToCorrectRiddle();
@@ -214,6 +279,8 @@ $(function(event){
 		});
 
 		$('#cactus').click(function(){
+			soundEffects('cactus');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('you\'re technically correct, but...');
 				resetToCorrectRiddle();
@@ -221,6 +288,8 @@ $(function(event){
 		});
 
 		$('#window').click(function(){
+			soundEffects('window');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('obviously... not');
 				resetToCorrectRiddle();
@@ -228,6 +297,8 @@ $(function(event){
 		});
 
 		$('#cat').click(function(){
+			soundEffects('cat');
+
 			if (incorrectCall != 3){
 				$('.display-message').html('i mean you could try');
 				resetToCorrectRiddle();
@@ -235,28 +306,45 @@ $(function(event){
 		});
 
 		$('.frames').click(function(){
+			soundEffects('frames');
+
 			if (incorrectCall != 2){
 				$('.display-message').html('wrong');
 				resetToCorrectRiddle();
 			}
 		});
 
+		$('#umbrella').click(function(){
+			soundEffects('umbrella');
+
+			if (incorrectCall != 1){
+				$('.display-message').html('nope');
+				resetToCorrectRiddle();
+			}
+		});
+
 		$('#chair').click(function(){
+			soundEffects('chair');
+
 			$('.display-message').html('Not quite');
 			resetToCorrectRiddle();
 		});	
 
 		$('#bookshelf').click(function(){
+			soundEffects('bookshelf');
+
 			$('.display-message').html('Good try');
 			resetToCorrectRiddle();
 		});
 
 		$('#lamp').click(function(){
+			soundEffects('lamp');
+
 			$('.display-message').html('it\'s not me')
 		});
 	}
 
-	function resetToCorrectRiddle(replay){
+	function resetToCorrectRiddle(){
 		livesLost++;
 		
 		if (livesLost === 5) {
@@ -330,13 +418,9 @@ $(function(event){
 			$('.game-wrapper').hide();
 			$('.success-wrapper').show();
 
-			timeoutHandle = window.clearInterval(interval);
+			window.clearInterval(interval);
 			showLeaderboard(seconds+'seconds', $username);	
 		}
-	}
-
-	function startTimer(){
-		interval = setInterval(countUp, 1000);
 	}
 
 	// function that displays riddle 1 text
