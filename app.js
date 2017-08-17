@@ -487,6 +487,7 @@ $(function(event){
 			}
 
 			joinToLeaderboard();
+			
 		} else {
 			// add username and time taken directly to board
     		$('#time-list').html($username+': '+elapsed);
