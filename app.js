@@ -59,6 +59,7 @@ $(function(event){
 		var bookshelfAudio = new Audio('sounds/bookshelf.mp3');
 		var cactusAudio = new Audio('sounds/cactus.mp3');
 		var catAudio = new Audio('sounds/cat.mp3');
+		var angryCatAudio = new Audio('sounds/angryCat.mp3');
 		var chairAudio = new Audio('sounds/chair.mp3');
 		var couchAudio = new Audio('sounds/couch.mp3');
 		var frameAudio = new Audio('sounds/frame.mp3');
@@ -78,6 +79,9 @@ $(function(event){
 				break;
 			case 'cat':
 				catAudio.play();
+				break;
+			case 'angryCat':
+				angryCatAudio.play();
 				break;
 			case 'chair':
 				chairAudio.play();
@@ -182,6 +186,7 @@ $(function(event){
 		$('#cat').click(function(){
 			$('.display-message').html('yellow');
 			animate($('#cat'));
+			soundEffects('cat');
 			$value = $(this).attr('id');
 			compareInRiddle3($value, $riddleCount, $username);
 		});
@@ -297,9 +302,9 @@ $(function(event){
 		});
 
 		$('#cat').click(function(){
-			soundEffects('cat');
 
 			if (incorrectCall != 3){
+				soundEffects('angryCat');
 				$('.display-message').html('i mean you could try');
 				resetToCorrectRiddle();
 			}
