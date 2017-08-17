@@ -3,6 +3,10 @@ body {
 	color: #526262;
 }
 
+p {
+	font-size: 20px;
+}
+
 /*--------------------------------------------------*/
 
 .home-wrapper, .success-wrapper, .gameover-wrapper, .leaderboard-wrapper {
@@ -18,7 +22,7 @@ body {
 }
 
 .home-wrapper header {
-	font-size: 40px;
+	font-size: 60px;
 	font-weight: bold;
 }
 

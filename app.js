@@ -20,6 +20,9 @@ $(function(event){
 	var answerArray = [];
 	var index = answerArray.length;
 
+	// array to store player:time objects to sort
+	var leaderboardArray = [];
+
 	// setup event listener for start button
 	function start($riddleCount){
 		// hide divs
@@ -220,6 +223,7 @@ $(function(event){
 		if ($value === $solution[index]){
 			answerArray.push($value);
 			index++;
+
 			// check if all matches are made
 			if (index === 4) {
 			endOfRiddle($riddleCount, $username);
@@ -231,7 +235,6 @@ $(function(event){
 			resetToCorrectRiddle();
 		}
 	}
-
 
 	function generalEventListeners($riddleCount, $username){
 		// setup incorrect table listener
@@ -351,7 +354,8 @@ $(function(event){
 
 	function resetToCorrectRiddle(){
 		livesLost++;
-		
+		index = 0;
+
 		if (livesLost === 5) {
 			$('.game-wrapper').hide();
 			$('.gameover-wrapper').show();
@@ -424,7 +428,7 @@ $(function(event){
 			$('.success-wrapper').show();
 
 			window.clearInterval(interval);
-			showLeaderboard(seconds+'seconds', $username);	
+			showLeaderboard(seconds, $username);	
 		}
 	}
 
@@ -450,7 +454,9 @@ $(function(event){
 		$('.display-message').html(newString.join(", "));
 	}
 
+
 	function showLeaderboard(elapsed, $username){
+
 		$('#leaderboardBtn').click(function(){
 			$('.success-wrapper').hide();
 			$('.leaderboard-wrapper').show();
@@ -460,20 +466,28 @@ $(function(event){
 		if (typeof(Storage) !== "undefined") {
 			localStorage.setItem($username, elapsed);
 
-			console.log(localStorage, 'localStorage')
-
 			for( var i = 0; i < localStorage.length; i++){
-				var myKey = localStorage.key(i);
-				var myValue = localStorage.getItem(localStorage.key(i));
+				var key = localStorage.key(i);
+				var value = localStorage.getItem(localStorage.key(i));
 
-				if(myKey === $username) {
-					myKey = $username + " New";
+				// if username is taken, create a new one
+				if(key === $username) {
+					key = $username + " New";
 				}
+				
+				var obj = {};
+				obj.name = key;
+				obj.score = value;
 
-				var li = $('<li class="scores">New Score</li>');
-    			$('ul').append(li);
-    			$($('.scores').get(i)).html(myKey + ' : ' + myValue);
+				leaderboardArray.push(obj);
+
+				leaderboardArray = leaderboardArray.sort(function(a,b){
+					return parseFloat(a.score)-parseFloat(b.score);
+				});
 			}
+
+			joinToLeaderboard();
+			
 		} else {
 			// add username and time taken directly to board
     		$('#time-list').html($username+': '+elapsed);
@@ -481,6 +495,18 @@ $(function(event){
 
 		// Ask user to play again
 		restartButtonEventListener();
+	}
+	
+	// append array to leaderboard list
+	function joinToLeaderboard(){
+		// loop through array
+		for (var object = 0; object < leaderboardArray.length; object++){
+			var player = leaderboardArray[object];
+			var li = $('<li class="scores">New Score</li>');
+    		
+    		$('ol').append(li);
+    		$($('.scores').get(object)).html(player.name + ' : ' + player.score);
+		}
 	}
 
 	start($riddleCount);
