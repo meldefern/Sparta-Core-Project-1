@@ -88,7 +88,7 @@ Sprint 3 after a board clean up from completing what I had left over:
 ## What i found difficult 
 
 ### Timer Implementation
-After I decided against the bootstrap approach, The first difficulties I faced was in implementing a timer. My acceptance criteria was to allow the user to view their time taken, so after failing to deliver a running timer, I set out calculating the elapsed time, and returning it at the end of the game. Mentioning the blocker in the morning stand up, I found the other members experiencing the same difficulty. Using our trainer's simple CodePen code, we edited it to fulfill our intentions.
+After I decided against the bootstrap approach, the first difficulty I faced was in implementing a timer. My acceptance criteria was to allow the user to view their time taken, so after failing to deliver a running timer, I set out calculating the elapsed time, and returning it at the end of the game. Mentioning the blocker in the morning stand up, I found the other members experiencing the same difficulty. Using our trainer's simple CodePen code, we edited it to fulfill our intentions.
 
 ### Using Media Queries
 When attempting to use media queries for a responsive game, I realised I had began it too close to the end of the project; I would have had little time to make changes to the consequential problems. If I had more time, I would have made a better attempt. The most straightforward advice I found to applying media queries, found [here](http://blog.sklambert.com/responsive-html5-canvas-game/), would have worked better for me had I used it in my initial build. The number of clickable objects in my game meant that a lot of CSS changes would have had to be made and a lot of time taken up.
@@ -98,20 +98,29 @@ When attempting to use media queries for a responsive game, I realised I had beg
 After being unsuccessful with the media queries, I decided to work on providing the user with an ordered leaderboard. This took longer than I expected as my experience with JavaScript objects was very limited. The data I received from setting the localStorage was of type Object. To order the objects i had to store them in an array to access and sort. Accessing the data inside the objects to return proved more difficult, as the concept was felt abstract and new to me. I initially thought I could access the elements by creating multiple objects in the array, each with the username as key and time taken as value. This made it more confusing to access, as the value was entirely reliant on the undefined username. With help and advice using debugger to visually identify the object inside the array, I rewrote my object in an array, so to have the username and time accessible each by their own keys. This left the array filled with objects of size 2.
 
 ``` 
-player = { 
-	"user": melinda,
-	"score": 14
+leaderboardArray =[
+	player = { 
+		"user": melinda,
+		"score": 14
 	} 
+	...
+}
 ```
 Accessing the object from inside the leaderboardArray:
 
 ![leaderboard code](readMeImages/leaderboardJoin.png)
 
 ## What I'm Proud Of
-
+My compareRiddle3 function, pictured below is one that i'm the most proud of, but also one of the most difficult to arrive to.
 ![compareRiddle3](readMeImages/riddle3/compareInRiddle3.png)
 ![riddle3EventListeners](readMeImages/riddle3/riddle3EventListeners.png)
 ![riddle3IncorrectEventListeners](readMeImages/riddle3/riddle3IncorrectEventListeners.png)
+The solution to the riddle was for the user to input 4 values in sequential order. If the user made a mistake, they would lose a life, and be allowed to begin the sequence again.
+My first attempt at writing the function had me storing the clicked objects inside an array and then comparing the clearing the array when necessary. I spent several hours fixing a bug where the array refused to empty after being set to null, and would not only create a new array, but the initial array would accumulate the values pushed.
+After reassessing the situation, I decided to rethink the way I approached the function. I now compared the single objects with the corresponding element in the solution array. If it matched, I would push the element to an answerArray and increment the index value for the solution array to check if the next clicked object matches.
+If the user clicked an incorrect object, the answerArray would reset to an empty array and the index value, for the solution array, to zero.
+If the answerArray was of size 4, that meant it had been filled to match the solution array, and the riddle could complete.
+
 
 ## How to Run
 1. Access at https://meldefern.github.io/Sparta-Core-Project-1/
