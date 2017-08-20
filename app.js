@@ -151,7 +151,7 @@ $(function(event){
 		// setup correct room object event listeners
 		var $frame = [$('#frame1'), $('#frame2'), $('#frame3')];
 		
-		// if clicked frame, remove first array element
+		// if clicked frame, remove first message array element
 		// so items can be clicked in any order
 		$frame[0].click(function(){
 			shiftArray($riddleCount, $username, $frame[0]);
@@ -160,15 +160,17 @@ $(function(event){
 			shiftArray($riddleCount, $username, $frame[1]);
 		});
 		$frame[2].click(function(){
-			shiftArray($riddleCount, $username, $frame[3]);
+			shiftArray($riddleCount, $username, $frame[2]);
 		});
 	}
 
 	
 	function shiftArray($riddleCount, $username, $frame){
-		// empty the array of first item after each icon is clicked
+		// empty the messageOrderarray of first item after each icon is clicked
 		$('.display-message').html(messageOrder[0]);
 		messageOrder.shift();
+		// turn off frame to prevent reclicks
+		$frame.off();
 
 		if (messageOrder.length === 0){
 			endOfRiddle($riddleCount, $username);
@@ -487,7 +489,7 @@ $(function(event){
 			}
 
 			joinToLeaderboard();
-			
+
 		} else {
 			// add username and time taken directly to board
     		$('#time-list').html($username+': '+elapsed);
