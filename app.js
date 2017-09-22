@@ -23,6 +23,8 @@ $(function(event){
 	// array to store player:time objects to sort
 	var leaderboardArray = [];
 
+	var itemAudio = ['bookshelfAudio', 'cactusAudio', 'catAudio', 'angryCatAudio', 'chairAudio', 'couchAudio', 'frameAudio', 'lampAudio', 'shelfAudio', 'tableAudio', 'umbrellaAudio', 'windowAudio', 'wineAudio'];
+
 	// setup event listener for start button
 	function start($riddleCount){
 		// hide divs
@@ -40,10 +42,13 @@ $(function(event){
 	        $('.home-wrapper').hide();
 	        // function to show gameplay div
 	        $('.game-wrapper').show();
-	        generalEventListeners($riddleCount, $username);
-	        nextRiddle($riddleCount, $username);
 
 	        $('#lives').html($lives.join(" "));
+
+	        initialiseSoundEffects();
+	        generalEventListeners($riddleCount, $username);
+	        nextRiddle($riddleCount, $username);
+	        
 	    });	
 	}	
 
@@ -58,60 +63,62 @@ $(function(event){
 		interval = setInterval(countUp, 1000);
 	}
 
-	function soundEffects(item){
-		var bookshelfAudio = new Audio('sounds/bookshelf.mp3');
-		var cactusAudio = new Audio('sounds/cactus.mp3');
-		var catAudio = new Audio('sounds/cat.mp3');
-		var angryCatAudio = new Audio('sounds/angryCat.mp3');
-		var chairAudio = new Audio('sounds/chair.mp3');
-		var couchAudio = new Audio('sounds/couch.mp3');
-		var frameAudio = new Audio('sounds/frame.mp3');
-		var lampAudio = new Audio('sounds/lamp.mp3');
-		var shelfAudio = new Audio('sounds/shelf.mp3');
-		var tableAudio = new Audio('sounds/table.mp3');
-		var umbrellaAudio = new Audio('sounds/umbrella.mp3');
-		var windowAudio = new Audio('sounds/window.mp3');
-		var wineAudio = new Audio('sounds/wine.mp3');
+	function initialiseSoundEffects(){
+		itemAudio[0] = new Audio('sounds/bookshelf.mp3');
+		itemAudio[1] = new Audio('sounds/cactus.mp3');
+		itemAudio[2] = new Audio('sounds/cat.mp3');
+		itemAudio[3] = new Audio('sounds/angryCat.mp3');
+		itemAudio[4] = new Audio('sounds/chair.mp3');
+		itemAudio[5] = new Audio('sounds/couch.mp3');
+		itemAudio[6] = new Audio('sounds/frame.mp3');
+		itemAudio[7] = new Audio('sounds/lamp.mp3');
+		itemAudio[8] = new Audio('sounds/shelf.mp3');
+		itemAudio[9] = new Audio('sounds/table.mp3');
+		itemAudio[10] = new Audio('sounds/umbrella.mp3');
+		itemAudio[11] = new Audio('sounds/window.mp3');
+		itemAudio[12] = new Audio('sounds/wine.mp3');
+	}
 
+	function soundEffects(item){
 		switch(item){
 			case 'bookshelf':
-				bookshelfAudio.play();
+				itemAudio[0].play();
 				break;
 			case 'cactus':
-				cactusAudio.play();
+				itemAudio[1].play();
 				break;
 			case 'cat':
-				catAudio.play();
+				itemAudio[2].play();
 				break;
 			case 'angryCat':
-				angryCatAudio.play();
+				itemAudio[3].play();
 				break;
 			case 'chair':
-				chairAudio.play();
+				itemAudio[4].play();
 				break;
 			case 'couch':
-				couchAudio.play();
+				itemAudio[5].play();
 				break;
 			case 'frames':
-				frameAudio.play();
+				itemAudio[6].play();
 				break;
 			case 'lamp':
-				lampAudio.play();
+				itemAudio[7].play();
 				break;
 			case 'shelf':
-				shelfAudio.play();
+				itemAudio[8].play();
 				break;
 			case 'table':
-				tableAudio.play();
+				itemAudio[9].play();
 				break;
 			case 'umbrella':
-				umbrellaAudio.play();
+				itemAudio[10].play();
 				break;
 			case 'window':
-				windowAudio.play();
+				itemAudio[11].play();
 				break;
 			case 'wine':
-				wineAudio.play();	
+				itemAudio[12].play();	
 		}
 	}
 
@@ -151,7 +158,7 @@ $(function(event){
 		// setup correct room object event listeners
 		var $frame = [$('#frame1'), $('#frame2'), $('#frame3')];
 		
-		// if clicked frame, remove first array element
+		// if clicked frame, remove first message array element
 		// so items can be clicked in any order
 		$frame[0].click(function(){
 			shiftArray($riddleCount, $username, $frame[0]);
@@ -160,15 +167,18 @@ $(function(event){
 			shiftArray($riddleCount, $username, $frame[1]);
 		});
 		$frame[2].click(function(){
-			shiftArray($riddleCount, $username, $frame[3]);
+			shiftArray($riddleCount, $username, $frame[2]);
 		});
 	}
 
 	
 	function shiftArray($riddleCount, $username, $frame){
-		// empty the array of first item after each icon is clicked
+		soundEffects('frames');
+		// empty the messageOrderarray of first item after each icon is clicked
 		$('.display-message').html(messageOrder[0]);
 		messageOrder.shift();
+		// turn off frame to prevent reclicks
+		$frame.off();
 
 		if (messageOrder.length === 0){
 			endOfRiddle($riddleCount, $username);
@@ -314,9 +324,9 @@ $(function(event){
 		});
 
 		$('.frames').click(function(){
-			soundEffects('frames');
 
 			if (incorrectCall != 2){
+				soundEffects('frames');
 				$('.display-message').html('wrong');
 				resetToCorrectRiddle();
 			}
@@ -487,7 +497,7 @@ $(function(event){
 			}
 
 			joinToLeaderboard();
-			
+
 		} else {
 			// add username and time taken directly to board
     		$('#time-list').html($username+': '+elapsed);
